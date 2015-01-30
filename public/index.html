@@ -8,6 +8,17 @@
     <title>Crypto Platform</title>
 
     <!-- CSS -->
+    <!-- Bootstrap Core CSS -->
+    <link href="libs/startbootstrap-sb-admin-1.0.2/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="libs/startbootstrap-sb-admin-1.0.2/sb-admin.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="libs/startbootstrap-sb-admin-1.0.2/plugins/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="libs/startbootstrap-sb-admin-1.0.2/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css"> <!-- custom styles -->
 
@@ -25,11 +36,13 @@
     <!-- ANGULAR CUSTOM -->
     <script src="js/controllers/MainCtrl.js"></script>
     <script src="js/controllers/NerdCtrl.js"></script>
+    <script src="js/controllers/BtcCtrl.js"></script>
+    <script src="js/services/BtcService.js"></script>
     <script src="js/services/NerdService.js"></script>
     <script src="js/appRoutes.js"></script>
     <script src="js/app.js"></script>
 </head>
-<body ng-app="sampleApp" ng-controller="NerdController">
+<body ng-app="sampleApp" ng-controller="MainController">
 <div class="container">
 
     <!-- HEADER -->
@@ -41,6 +54,9 @@
         <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
         <ul class="nav navbar-nav">
             <li><a href="/nerds">Kagi & Tape</a></li>
+        </ul>
+        <ul class="nav navbar-nav">
+            <li><a href="/btc">Download Data</a></li>
         </ul>
     </nav>
 

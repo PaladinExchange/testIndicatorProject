@@ -9,6 +9,12 @@
             controller: 'MainController'
         })
 
+        .when('/btc', {
+            templateUrl: 'views/btc.html',
+            controller: 'BtcController'
+
+        })
+
         // nerds page that will use the NerdController
         .when('/nerds', {
             templateUrl: 'views/nerd.html',

@@ -38,7 +38,7 @@ function genBubbles(dataPoints) {
                 {
                     type: "bubble",
                     indexLabel: "{z}",
-                    indexLabelFontSize: 10,
+                    indexLabelFontSize: 12,
                     indexLabelFontColor: "black",
                     indexLabelPlacement: "outside",
                     showInLegend: true,
@@ -70,7 +70,8 @@ order_book_channel.bind('data', function(data) {
     var asks = data['asks'];
     for(i = 0; i < asks.length ;i++) {
         var yHolder = Number(asks[i][0]);
-        var zHolder = Number(asks[i][1]);
+        var zLong = Number(asks[i][1]);
+        var zHolder = Math.round(zLong * 100) / 100;
         var pushI = { 	x: i,
             y: yHolder,
             z: zHolder,
@@ -82,7 +83,8 @@ order_book_channel.bind('data', function(data) {
     for(i = 0; i < d.length ;i++) {
         rI = 19 - i;
         var yHolder = Number(d[i][0]);
-        var zHolder = Number(d[i][1]);
+        var zLong = Number(d[i][1]);
+        var zHolder = Math.round(zLong * 100) / 100;
 
         var pushI = { 	x: i,
             y: yHolder,
