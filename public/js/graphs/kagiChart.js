@@ -3,13 +3,41 @@
  */
 
 
+
+
+function generateKagiGraph() {
+    var chart = new CanvasJS.Chart("chartContainer2",
+        {
+            title:{
+                text: "Kagi Graph"
+            },
+            animationEnabled: true,
+            axisY:{
+                maximum: 235,
+                minimum: 230,
+                includeZero: false
+            },
+
+            data: [
+                {
+                    type: "stepLine",
+                    toolTipContent: "{x}: {y}%",
+                    markerSize: 5,
+                    dataPoints: priceData
+                }
+
+            ]
+        });
+
+    chart.render();
+}
+
 var pusher = new Pusher('de504dc5763aeef9ff52');
 var trades_channel = pusher.subscribe('live_trades');
-var i = 0;
+var j = 0;
 var t = 15;
 var p;
 var priceData = [];
-
 
 trades_channel.bind('trade', function(data) {
 
@@ -25,14 +53,14 @@ trades_channel.bind('trade', function(data) {
     cell1.innerHTML = currentTime;
     cell2.innerHTML = data['amount'];
     cell3.innerHTML = data['price'];
-    i++;
+    j++;
 
 
     var secondRow = table.rows[2];
 
 
-    priceData.push({x: i, y: data['price']});
-    console.log(priceData);
+    priceData.push({x: j, y: data['price']});
+    console.log(j);
     price = data['price'];
 
     if (price < p) {
@@ -46,4 +74,5 @@ trades_channel.bind('trade', function(data) {
     }
 
     p = price;
+    generateKagiGraph();
 });

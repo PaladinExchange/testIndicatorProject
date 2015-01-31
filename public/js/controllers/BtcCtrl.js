@@ -2,9 +2,18 @@
  * Created by danny on 1/30/15.
  */
 // public/js/controllers/BtcCtrl.js
-angular.module('BtcCtrl', []).controller('BtcController', function($scope) {
+angular.module('BtcCtrl', []).controller('BtcController', function($scope, $http) {
 
-    $scope.tagline = 'Bid Ask Graph which will display the live order book for 20 total orders';
+    $http.get('/api/btc')
+        .success(function(data){
+            console.log(data);
+            $scope.tagline = data;
+        })
+        .error(function(){
+            console.log('Error: ' + data);
+
+        });
+
 
 });
 
