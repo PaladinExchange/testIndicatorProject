@@ -1,32 +1,34 @@
 /**
  * Created by danny on 1/29/15.
  */
+var min;
+var max;
+
+function genHighLowBubs(){
+    min = Number(document.getElementById("min").value);
+    max = Number(document.getElementById("max").value);
+
+}
 
 
 function genBubbles(dataPoints) {
-    var min = dataPoints[39]['y'] - .25;
-    var max = dataPoints[19]['y'] + .25;
+    //var min = dataPoints[39]['y'] - .25;
+    //var max = dataPoints[19]['y'] + .25;
 
     var chart = new CanvasJS.Chart("chartContainer",
         {
             zoomEnabled: true,
             animationEnabled: false,
-            height: 800,
             title:{
 
             },
 
             axisX: {
-                title:"Queue",
-                titleFontSize: 20,
-                labelFontSize: 15
+
             },
             axisY: {
-                title:"Price",
                 maximum: max,
-                minimum: min,
-                titleFontSize: 20,
-                labelFontSize: 15
+                minimum: min
 
             },
 
@@ -37,15 +39,11 @@ function genBubbles(dataPoints) {
             data: [
                 {
                     type: "bubble",
-                    indexLabel: "{z}",
-                    indexLabelFontSize: 12,
-                    indexLabelFontColor: "black",
-                    indexLabelPlacement: "outside",
-                    showInLegend: true,
-                    legendMarkerType: "circle",
-                    legendMarkerColor: "grey",
+                    //indexLabel: "{name}",
+                    //indexLabelFontSize: 12,
+                    //indexLabelFontColor: "black",
+                    //indexLabelPlacement: "outside",
                     toolTipContent: "<span style='\"'color: {color};'\"'><strong>{name}</strong></span><br/><strong>Queue</strong> {x}<br/> <strong>Price</strong> {y}<br/> <strong>Size</strong> {z}",
-
                     dataPoints: dataPoints
                 }
             ]
@@ -57,42 +55,38 @@ function genBubbles(dataPoints) {
 }
 
 
-
-var bids_placeholder = document.getElementById("bids_placeholder")
-var asks_placeholder = document.getElementById("asks_placeholder")
 var pusher = new Pusher('de504dc5763aeef9ff52');
 var order_book_channel = pusher.subscribe('order_book');
-var dataPoints = new Array(39);
-
+var dataPoints = [39];
 
 order_book_channel.bind('data', function(data) {
-    var d = data['bids'];
+    var bids = data['bids'];
     var asks = data['asks'];
     for(i = 0; i < asks.length ;i++) {
-        var yHolder = Number(asks[i][0]);
+        var yvar = Number(asks[i][0]);
         var zLong = Number(asks[i][1]);
-        var zHolder = Math.round(zLong * 100) / 100;
+        var nameBids = Math.round(zLong * 100) / 100;
         var pushI = { 	x: i,
-            y: yHolder,
-            z: zHolder,
-            name: asks[i][0]
+            y: yvar,
+            z: nameBids,
+            name: nameBids
         };
         dataPoints[i] = pushI;
     }
 
-    for(i = 0; i < d.length ;i++) {
+    for(i = 0; i < bids.length ;i++) {
         rI = 19 - i;
-        var yHolder = Number(d[i][0]);
-        var zLong = Number(d[i][1]);
-        var zHolder = Math.round(zLong * 100) / 100;
-
+        var yHolder = Number(bids[i][0]);
+        var zLong = Number(bids[i][1]);
+        var nameAsks = Math.round(zLong * 100) / 100
         var pushI = { 	x: i,
             y: yHolder,
-            z: zHolder,
-            name: d[i][0]
+            z: nameAsks,
+            name: nameAsks
         };
         dataPoints[i + 20] = pushI;
     }
+
     genBubbles(dataPoints);
 
 });

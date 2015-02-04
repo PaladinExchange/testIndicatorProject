@@ -2,7 +2,14 @@
 
 // grab the nerd model we just created
 //var Nerd = require('./models/nerd');
-var Btc = require('./models/btc')
+var Btc = require('./models/btc');
+var http = require('http');
+
+ var options = {
+     host: "www.bitstamp.net",
+     path: "/api/transactions/",
+     method: 'GET'
+ };
     module.exports = function(app) {
 
         // server routes ===========================================================
@@ -21,10 +28,27 @@ var Btc = require('./models/btc')
                 console.log(btc);
                 res.json(btc); // return all nerds in JSON format
             });
-        });
+        })
 
         // route to handle creating goes here (app.post)
         // route to handle delete goes here (app.delete)
+
+
+        // route to get the bitstamp data back
+        app.get('/api/start', function(){
+            var http = require('http');
+
+            var options = {
+                host: "www.bitstamp.net",
+                path: "/api/transactions/",
+                method: 'GET'
+            };
+
+
+            http.get(options, function(res){
+
+            });
+        })
 
         // frontend routes =========================================================
         // route to handle all angular requests
@@ -33,6 +57,8 @@ var Btc = require('./models/btc')
         });
 
     };
+
+
 
 
 

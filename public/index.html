@@ -18,15 +18,11 @@
 
     <!-- Custom CSS -->
     <link href="libs/startbootstrap-sb-admin-1.0.2/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="libs/startbootstrap-sb-admin-1.0.2/plugins/morris.css" rel="stylesheet">
-
+    <link href="libs/startbootstrap-sb-admin-1.0.2/trade.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="libs/startbootstrap-sb-admin-1.0.2/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css">
         <!--<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">-->
         <!--<link rel="stylesheet" href="css/style.css"> &lt;!&ndash; custom styles &ndash;&gt;-->
-
     <!-- JS -->
     <script src="libs/angular/angular.min.js"></script>
     <script src="libs/angular-route/angular-route.min.js"></script>
@@ -49,161 +45,104 @@
 </head>
 <body ng-app="sampleApp" ng-controller="BtcController">
 
-    <div id="wrapper">
-    <!-- HEADER -->
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
+<!-- Wrap all page content here -->
+<div id="wrap">
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin</a>
+                <a class="navbar-brand" href="#">Brand</a>
             </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu message-dropdown">
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-footer">
-                            <a href="#">Read All New Messages</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu alert-dropdown">
-                        <li>
-                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">View All</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-
-
-
-
-
-    <nav class="navbar navbar-inverse">
-        <div class="navbar-header">
-        </div
-                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav side-nav">
-                <li>
-                    <a href="/"><i class="fa fa-fw fa-bar-chart-o"></i> Bubble Chart </a>
-                </li>
-                <li>
-                    <a href="/nerds"><i class="fa fa-fw fa-dashboard"></i> Kagi & Tape </a>
-                </li>
-                <li>
-                    <a href="/btc"><i class="fa fa-fw fa-bar-chart-o"></i> Download Data </a>
-                </li>
-            </ul>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!--/.nav-collapse -->
         </div>
-        <!-- /.navbar-collapse -->
-    </nav>
-</nav>
-    <div id="page-wrapper">
-    <!-- ANGULAR DYNAMIC CONTENT -->
-    <div ng-view></div>
+    </div>
 
+    <!-- Begin page content -->
+    <div class="center-container">
+            <div class="center-row" style="background-color: #575757; height: 10%;">
+
+
+                <div class="col-md-2" style="margin-top: 0">
+
+                </div>
+                <form>
+                    <div class="col-md-1" style="margin-top: 0">
+                        <div class="form-group" style="margin-top: 10%">
+                            <input type="min" class="form-control" id="min" placeholder="Price Min">
+                        </div>
+                    </div>
+                    <div class="col-md-1" style="margin-top: 0">
+                        <div class="form-group" style="margin-top: 10%">
+                            <input type="max" class="form-control" id="max" placeholder="Price Max">
+                        </div>
+                    </div>
+                </form>
+                <div class="col-md-1">
+                    <button style="margin-top: 15%" onclick="genHighLowKagi(); genHighLowBubs();">Update</button>
+                </div>
+            </div>
+
+            <div class="center-row">
+
+                <div class="container-fluid">
+                    <div class="col-md-2" style="background-color: #6B6B6B; height: 90%">
+                        <table id="trades_table" class="display" cellspacing="0"  width="100%">
+                            <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Size</th>
+                                <th>Price</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="col-md-6" style="height: 90%">
+                        <div id="chartContainer2" style="height: 570px; width: 100%; margin: 0 auto"></div>
+                    </div>
+                    <div class="col-md-1" style="background-color: #7D7D7D; height: 90%">
+                    </div>
+                    <div class="col-md-3" style="background-color: #7D7D7D; height: 90%">
+                        <div id="chartContainer" style="height: 570px; margin: 0 auto;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div id="footer">
+    <div class="container">
+        <p>&nbsp;</p>
+        <p class="lead"></p>
     </div>
 </div>
-
+            <!--&lt;!&ndash; ANGULAR DYNAMIC CONTENT &ndash;&gt;-->
+            <!--<div ng-view></div>-->
 
 </body>
-
-
-
 </html>
 
 
