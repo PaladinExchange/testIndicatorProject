@@ -6,7 +6,6 @@ angular.module('BtcCtrl', []).controller('BtcController', function($scope, $http
 
     $http.get('/api/btc')
         .success(function(data){
-            console.log(data);
             $scope.tagline = data;
         })
         .error(function(){

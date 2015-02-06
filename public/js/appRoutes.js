@@ -3,20 +3,20 @@
 
     $routeProvider
 
+
         // home page
         .when('/', {
-            templateUrl: 'views/home.html',
+            templateUrl: '/index.ejs'
+        })
+
+        .when('/home', isLoggedIn, {
+            templateUrl: 'views/index.html',
             controller: 'MainController'
         })
 
-        .when('/btc', {
-            templateUrl: 'views/btc.html',
-            controller: 'BtcController'
-
-        })
 
         // nerds page that will use the NerdController
-        .when('/nerds', {
+        .when('/nerds', isLoggedIn, {
             templateUrl: 'views/nerd.html',
             controller: 'NerdController'
         });
@@ -24,5 +24,12 @@
     $locationProvider.html5Mode(true);
 
 }]);
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+
+    res.redirect('/');
+}
 
 

@@ -17,6 +17,7 @@ function genBubbles(dataPoints) {
 
     var chart = new CanvasJS.Chart("chartContainer",
         {
+            backgroundColor: "#000000",
             zoomEnabled: true,
             animationEnabled: false,
             title:{
@@ -24,11 +25,18 @@ function genBubbles(dataPoints) {
             },
 
             axisX: {
-
+                gridColor: "orange",
+                labelFontColor: "orange",
+                lineColor: "orange",
+                tickColor: "orange"
             },
             axisY: {
                 maximum: max,
-                minimum: min
+                minimum: min,
+                gridColor: "orange",
+                labelFontColor: "orange",
+                tickColor: "orange",
+                lineColor: "orange"
 
             },
 
@@ -39,6 +47,7 @@ function genBubbles(dataPoints) {
             data: [
                 {
                     type: "bubble",
+                    fillOpacity:.7,
                     //indexLabel: "{name}",
                     //indexLabelFontSize: 12,
                     //indexLabelFontColor: "black",

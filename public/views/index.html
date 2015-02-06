@@ -1,15 +1,224 @@
- <!-- public/views/index.html -->
+<!-- public/index.html -->
 <!doctype html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <meta charset="UTF-8">
+    <base href="/">
 
-    <title>Default homepage</title>
+    <title>Crypto Platform</title>
 
+    <!-- CSS -->
+    <!-- Bootstrap Core CSS -->
+    <link href="../libs/startbootstrap-sb-admin-1.0.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../libs/startbootstrap-sb-admin-1.0.2/css/sb-admin.css" rel="stylesheet">
+    <link href="../libs/startbootstrap-sb-admin-1.0.2/trade.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="libs/startbootstrap-sb-admin-1.0.2/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <!--<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">-->
+        <!--<link rel="stylesheet" href="css/style.css"> &lt;!&ndash; custom styles &ndash;&gt;-->
+    <!-- JS -->
+    <script src="../libs/jquery/dist/jquery.min.js"></script>
+    <script src="../libs/angular/angular.min.js"></script>
+    <script src="../libs/angular-route/angular-route.min.js"></script>
+
+    <!--CHARTS & GRAPHS-->
+    <script src="../js/canvasjs.min.js"></script>
+    <script src="https://d3dy5gmtp8yhk7.cloudfront.net/2.1/pusher.min.js" type="text/javascript"></script>
+    <script src="https://d3dy5gmtp8yhk7.cloudfront.net/2.1/pusher.min.js" type="text/javascript"></script>
+    <script src="../js/graphs/bubbleChart.js"></script>
+    <script src="../js/graphs/kagiChart.js"></script>
+
+    <!-- ANGULAR CUSTOM -->
+    <script src="../js/controllers/MainCtrl.js"></script>
+    <script src="../js/controllers/NerdCtrl.js"></script>
+    <script src="../js/services/NerdService.js"></script>
+    <script src="../js/appRoutes.js"></script>
+    <script src="../js/app.js"></script>
 </head>
-<body>
+<body ng-app="sampleApp" ng-controller="MainController">
 
-    If you're seeing this, something is hella broken.
+<!-- Wrap all page content here -->
+<div id="wrap">
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Paladin.Exchange</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="/">Backtesting</a></li>
+                    <li><a href="/">Download Data</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Markets <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Bitstamp</a></li>
+                            <li><a href="#">Bitfinex</a></li>
+                            <li><a href="#">Chinese <shit></shit></a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+
+    <!-- Begin page content -->
+    <div class="center-container">
+            <div class="center-row" style="background-color: #black; height: 10%;">
+
+                <form>
+                    <div class="col-md-1" style="margin-top: 0">
+                        <div class="form-group" style="margin-top: 15%">
+                            <input type="min" class="form-control" id="min" placeholder="Price Min">
+                        </div>
+                    </div>
+                    <div class="col-md-1" style="margin-top: 0">
+                        <div class="form-group" style="margin-top: 15%">
+                            <input type="max" class="form-control" id="max" placeholder="Price Max">
+                        </div>
+                    </div>
+                </form>
+                <div class="col-md-1">
+                    <button style="margin-top: 20%" onclick="genHighLowKagi(); genHighLowBubs();">Update</button>
+                </div>
+                <div class="col-md-5"></div>
+                <div class="col-md-1">
+                    <h4>Last 24 hrs</h4 >
+                </div>
+            </div>
+
+            <div class="center-row">
+
+                <div class="container-fluid">
+                    <div class="col-md-2" style="background-color: #black; height: 90%">
+                        <div style="height:570px;overflow:auto;">
+                            <table id="trades_table" class="display" cellspacing="0"  width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Size</th>
+                                    <th>Price</th>
+                                </tr>
+                                </thead>
+
+
+                             </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="height: 90%">
+                        <div id="chartContainer2" style="height: 570px; width: 100%; margin: 0 auto"></div>
+                    </div>
+                    <div class="col-md-1" style="background-color: black; height: 570px">
+                        <table id="price_table" class="display" cellspacing="0"  width="100%" height="570px">
+                            <tr><div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:20%">
+                                </div>
+                            </div></tr>
+                            <tr><div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:29%">
+                                </div>
+                            </div></tr>
+                            <tr><div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:39%">
+                                </div>
+                            </div></tr>
+                            <tr><div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:31%">
+                                </div>
+                            </div></tr>
+                            <tr><div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:24%">
+                                </div>
+                            </div></tr>
+                            <tr><div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:28%">
+                                </div>
+                            </div></tr>
+                            <tr><div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:36%">
+                                </div>
+                            </div></tr>
+                            <tr><div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:45%">
+                                </div>
+                            </div></tr>
+                            <tr><div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:56%">
+                                </div>
+                            </div></tr>
+                            <tr><div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:62%">
+                                </div>
+                            </div></tr>
+                            <tr><div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:53%">
+                                </div>
+                            </div></tr>
+                            <tr><div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:45%">
+                                </div>
+                            </div></tr>
+                            <tr><div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:39%">
+                                </div>
+                            </div></tr>
+                            <tr><div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:35%">
+                                </div>
+                            </div></tr>
+                        </table>
+                    </div>
+                    <div class="col-md-3" style="background-color: #black; height: 90%">
+                        <div id="chartContainer" style="height: 570px; margin: 0 auto;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div id="footer">
+    <div class="container">
+        <p>&nbsp;</p>
+        <p class="lead"></p>
+    </div>
+</div>
+            <!--&lt;!&ndash; ANGULAR DYNAMIC CONTENT &ndash;&gt;-->
+            <!--<div ng-view></div>-->
 
 </body>
 </html>
+
+

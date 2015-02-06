@@ -7,21 +7,29 @@ function genHighLowKagi() {
 
 }
 
-
-
 function generateKagiGraph() {
 
     var chart = new CanvasJS.Chart("chartContainer2",
         {
+            backgroundColor: "#000000",
             zoomEnabled: false,
             animationEnabled: false,
 
             axisX: {
-                labelFontSize: 15
+                labelFontSize: 10,
+                gridColor: "orange",
+                labelFontColor: "orange",
+                tickColor: "orange",
+                lineColor: "orange"
             },
             axisY: {
                 maximum: maxK,
-                minimum: minK
+                minimum: minK,
+                labelFontSize: 10,
+                gridColor: "orange",
+                labelFontColor: "orange",
+                tickColor: "orange",
+                lineColor: "orange"
 
 
             },
@@ -33,10 +41,7 @@ function generateKagiGraph() {
             data: [
                 {
                     type: "bubble",
-                    indexLabel: "{z}",
-                    indexLabelFontSize: 12,
-                    indexLabelFontColor: "black",
-                    indexLabelPlacement: "outside",
+                    fillOpacity:.7,
                     toolTipContent: "<span style='\"'color: {color};'\"'><strong>{name}</strong></span><br/><strong>Queue</strong> {x}<br/> <strong>Price</strong> {y}<br/> <strong>Size</strong> {z}",
 
                     dataPoints: priceData
@@ -57,7 +62,6 @@ var p;
 var priceData = [];
 
 trades_channel.bind('trade', function(data){
-    console.log("hello");
     var table = document.getElementById("trades_table")
     var row = table.insertRow(1);
     var cell1 = row.insertCell(0);
@@ -77,7 +81,6 @@ trades_channel.bind('trade', function(data){
 
 
     priceData.push({x: j, y: data['price'], z: data['amount']});
-    console.log(j);
     var price = data['price'];
 
     if (price < p) {
